@@ -5,6 +5,7 @@
         p3:.asciiz "Enter the n     umber [to get # occurrences]: "
         p4:.asciiz "number of occurrences : \n  "
         message: .asciiz "MM\n"
+        array: .space 60 #(4*15)
 
 
     .text
@@ -32,19 +33,38 @@ main:
 #   syscall
 
 # Reading the elements
-li $t8, 0 # setting counter = 0
+la $t4, array
+li $t8, 0 # setting t8 as a counter = 0
+li $t7, 0 # setting t7 as an index
+li $t6, 0 # setting t6 as temp to hold the use input
 loop: 
     # if the counter == size go to end segment
     beq     $t8, $t9, end 
 
     # loop body
 
-    # printing an integer
-    # put the value of $t0 into $s0, to prepare to print $t0
-    move    $s0, $t8
-    li      $v0, 1
-    move    $a0, $s0
+    # 1* reading a number from the user
+    li $v0, 6
     syscall
+
+    # store the user input in t6
+    mov.s $f6, $f0
+
+
+    # 2* add the number to the array
+    add $t5, $t7, $t4
+    sw $t6, ($t5)
+
+
+    # 3* upating index
+    addi $t7, $t7, 4
+
+
+#   # (TEST) printing  the user input
+#   move    $s0, $t6
+#   li      $v0, 1
+#   move    $a0, $s0
+#   syscall
      
 
     # increase the counter by 1
