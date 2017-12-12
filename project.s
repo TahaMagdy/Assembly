@@ -31,9 +31,31 @@ main:
 #   move $a0, $s0
 #   syscall
 
+# Reading the elements
+li $t8, 0 # setting counter = 0
+loop: 
+    # if the counter == size go to end segment
+    beq     $t8, $t9, end 
+
+    # loop body
+
+    # printing an integer
+    # put the value of $t0 into $s0, to prepare to print $t0
+    move    $s0, $t8
+    li      $v0, 1
+    move    $a0, $s0
+    syscall
+     
+
+    # increase the counter by 1
+    add     $t8, $t8, 1 
+    # jump on the firt instruction of the loop
+    j loop
 
 
-
+end:
     # END PROGRAM
     li $v0, 10
     syscall
+
+
