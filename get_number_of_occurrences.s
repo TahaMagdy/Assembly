@@ -71,56 +71,56 @@ main:
 
 #   // Populating the array
 scan_loop: 
-    beq     $t8,    $t9, end_scan_loop 
+        beq     $t8,    $t9, end_scan_loop 
 	
-    li      $v0,    6         # 1* reading a number from the user
-    syscall
-    mov.s   $f12,   $f0       # store the user input in $f12
+        li      $v0,    6         # 1* reading a number from the user
+        syscall
+        mov.s   $f12,   $f0       # store the user input in $f12
 
-    add     $t7,    $t7, $a3  # 2* adding the number to the array
-    s.s     $f12,   ($t7)     # store $f12 in the address of $t5
+        add     $t7,    $t7, $a3  # 2* adding the number to the array
+        s.s     $f12,   ($t7)     # store $f12 in the address of $t5
 	
-    addi    $t7,    $t7, 4    # 3* upating index
-    add     $t8,    $t8, 1    # increase the counter by 1 [i++]
-    j scan_loop	              # jump on the firt instruction of the loop
+        addi    $t7,    $t7, 4    # 3* upating index
+        add     $t8,    $t8, 1    # increase the counter by 1 [i++]
+        j scan_loop	          # jump on the firt instruction of the loop
 
 end_scan_loop:
-    jr      $ra               # go back to the main
+        jr      $ra               # go back to the main
 
 
 
 # // Computing occurances
 number_of_occurance:
 
-    # // initialization 
-    li      $t1, 0
-    li      $t3, 0
-    li      $t0, 0
+        # // initialization 
+        li      $t1, 0
+        li      $t3, 0
+        li      $t0, 0
 
 Loop:
-    // # Condition
-    beq     $t3, $a2, Exit
-    add     $t2, $a3, $t0
-    l.s     $f8, ($t2)
-    c.eq.s  $f8, $f1 
+        // # Condition
+        beq     $t3, $a2, Exit
+        add     $t2, $a3, $t0
+        l.s     $f8, ($t2)
+        c.eq.s  $f8, $f1 
 
-    bc1t IF_Body                            
+        bc1t IF_Body                            
 
-    # // updating the index and the counter
-    addi    $t0, $t0, 4              
-    addi    $t3, $t3, 1
-    j Loop
+        # // updating the index and the counter
+        addi    $t0, $t0, 4              
+        addi    $t3, $t3, 1
+        j Loop
 
 
 
-IF_Body :
+IF_Body:
 
-    addi    $t1, $t1, 1
-    addi    $t0, $t0, 4 
-    addi    $t3, $t3, 1
-    j Loop
+        addi    $t1, $t1, 1
+        addi    $t0, $t0, 4 
+        addi    $t3, $t3, 1
+        j Loop
 
 
 Exit:
-    add     $v1, $t1, $zero
-    jr      $ra
+        add     $v1, $t1, $zero
+        jr      $ra
