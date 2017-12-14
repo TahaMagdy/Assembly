@@ -10,7 +10,7 @@ p4:         .asciiz "number of occurrences : \n"
 array:      .word 60 #(4*15)
 
 	.text
-    .globl main
+   	.globl main
 main:
 	# printf("Enter the size of array: ");
 	li      $v0, 4      # system call code for print string     
