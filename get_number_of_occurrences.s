@@ -14,8 +14,8 @@ array:      .word 60 #(4*15)
 main:
 	# printf("Enter the size of array: ");
 	li      $v0, 4      # system call code for print string     
-	la      $a0, p1 	# load the sentence that exist in p1
-	syscall		        # evaluate system call
+	la      $a0, p1     # load the sentence that exist in p1
+	syscall		    # evaluate system call
 
 	
 	# scanf("%d",$size);
@@ -49,31 +49,31 @@ main:
 	# scanf("%f",$num);
 	li      $v0, 6      # system call code for scan float
  	syscall             # evaluate system call
-	mov.s   $f1, $f0	# move data that scanned from $f0 to $f1 
+	mov.s   $f1, $f0    # move data that scanned from $f0 to $f1 
 
 	
 	jal number_of_occurance 
 	
 	
 	# printf("number of occurrences : ");
-	li      $v0, 4         # system call code for print string
-	la      $a0, p4        # load the sentence that exist in p4
-	syscall	               # evaluate system call
+	li      $v0, 4      # system call code for print string
+	la      $a0, p4     # load the sentence that exist in p4
+	syscall	            # evaluate system call
 
 	
-	li      $v0, 1         # system call code for print integer 
-	move    $a0, $v1       # move data that returned from $v1 to $a0 
-	syscall                # evaluate system call
+	li      $v0, 1      # system call code for print integer 
+	move    $a0, $v1    # move data that returned from $v1 to $a0 
+	syscall             # evaluate system call
 	
-	li      $v0, 0         # system call code for end program
-	syscall                # evaluate system call
+	li      $v0, 0      # system call code for end program
+	syscall             # evaluate system call
 	
 
 #   // Populating the array
 scan_loop: 
     beq     $t8,    $t9, end_scan_loop 
 	
-    li      $v0,    6		  # 1* reading a number from the user
+    li      $v0,    6         # 1* reading a number from the user
     syscall
     mov.s   $f12,   $f0       # store the user input in $f12
 
